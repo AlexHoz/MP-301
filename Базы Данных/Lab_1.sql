@@ -21,7 +21,7 @@ WHERE color = 'y'
 --Задание 5
 SELECT DISTINCT model, speed, hd
 FROM PC
-WHERE (cd = '12x' or cd = '24x') and price < 600
+WHERE (cd = '12x' OR cd = '24x') AND price < 600
 
 --Задание 11
 SELECT AVG(speed) 
@@ -30,17 +30,17 @@ FROM PC
 --Задание 12
 SELECT AVG(speed) 
 FROM Laptop
-WHERE price>1000
+WHERE price > 1000
 
 --Задание 31
 SELECT class, country
 FROM Classes 
-WHERE bore >=16
+WHERE bore >= 16
 
 --Задание 33
 SELECT ship
 FROM Outcomes 
-WHERE battle = 'North Atlantic' and result = 'sunk'
+WHERE battle = 'North Atlantic' AND result = 'sunk'
 
 --Задание 42
 SELECT ship, battle
