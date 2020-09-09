@@ -64,6 +64,32 @@ WHERE model IN
     AND maker IN (SELECT maker FROM product WHERE type='Printer')
 
 --Задание 26
+SELECT AVG(price)
+FROM
+(
+SELECT PC.price, PC.code, Product.type, Product.model
+FROM PC JOIN Product ON (Product.model = PC.model 
+			AND Product.type = 'PC' AND Product.maker = 'A')
+UNION
+SELECT Laptop.price,Laptop.code, Product.type, Product.model
+FROM Laptop JOIN Product ON (Product.model = Laptop.model 
+			AND Product.type = 'Laptop' AND Product.maker = 'A')
+) AS NewTable
+
 --Задание 34
+SELECT DISTINCT name
+FROM Ships, Classes 
+WHERE Ships.launched >= 1922 AND Classes.type = 'bb' 
+      AND Classes.displacement > 35000 AND Ships.class = Classes.class
+
 --Задание 36
+SELECT name
+FROM Ships, Classes
+WHERE Ships.name = Classes.class
+UNION
+SELECT ship
+FROM Outcomes, Classes
+WHERE Outcomes.ship= Classes.class
+
+
 --Задание 80
