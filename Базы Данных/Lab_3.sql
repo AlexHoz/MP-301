@@ -91,3 +91,17 @@ FROM Outcomes, Classes
 WHERE Outcomes.ship = Classes.class
 
 --Задание 80
+SELECT DISTINCT maker 
+FROM product  
+WHERE maker NOT IN (
+	SELECT maker 
+	FROM product  
+	WHERE model IN ( 
+		SELECT model 
+		FROM product 
+		WHERE type = 'pc' 
+		EXCEPT 
+		SELECT model 
+		FROM pc 
+	) 
+) 
