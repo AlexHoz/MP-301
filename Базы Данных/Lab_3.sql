@@ -18,9 +18,8 @@ WHERE NewTable.model IN(
 
 --Задание 9
 SELECT DISTINCT maker
-FROM Product INNER JOIN 
-PC ON PC.model = Product.model
-WHERE PC.speed >= 450
+FROM Product
+WHERE model IN (SELECT model FROM PC WHERE speed >= 450)
 
 --Задание 10
 SELECT model, price
@@ -89,7 +88,6 @@ WHERE Ships.name = Classes.class
 UNION
 SELECT ship
 FROM Outcomes, Classes
-WHERE Outcomes.ship= Classes.class
-
+WHERE Outcomes.ship = Classes.class
 
 --Задание 80
