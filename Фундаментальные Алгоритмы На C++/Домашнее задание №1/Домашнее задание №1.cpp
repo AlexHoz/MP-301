@@ -2,6 +2,8 @@
 #include <cmath>
 #include <algorithm>
 #include <set>
+#include <vector>
+
 using namespace std;
 
 //Задание 1
@@ -15,8 +17,20 @@ double TriangleArea(double a, double b, double c) {
 //Задание 3
 struct Point
 {
-    int x;
-    int y;
+    double x;
+    double y;
+
+    Point()
+    {
+        this->x = 0;
+        this->y = 0;
+    }
+
+    Point(double x, double y)
+    {
+        this->x = x;
+        this->y = y;
+    }
 };
 double Length(Point a, Point b) { return sqrt(pow(b.x - a.x, 2) + pow(b.y - a.y, 2)); }
 
@@ -79,23 +93,41 @@ int AmountPointsPerimeter() {
     return p;
 }
 //Задание 9
-string Intersected(Point a, Point b, Point c, Point d)
+double getDirection(Point a, Point b, Point c)
 {
-    double denominator = (b.x - a.x) * (d.y - c.y) - (b.y - a.y) * (d.y - c.x);
-
-    if (denominator == 0) return "Не пересекаются";
-
-    double numeratorA = (a.y - c.y) * (d.x - c.x) - (a.x - c.x) * (d.y - c.y);
-    double numeratorB = (a.y - c.y) * (b.x - a.x) - (a.x - c.x) * (b.y - a.y);
-
-    double r = numeratorA / denominator;
-    double s = numeratorB / denominator;
-
-    if (r >= 0 && r <= 1 && s >= 0 && s <= 1)
-        return "Пересекаются";
-    else
-        return "Не пересекаются";
+    return (b.x - a.x) * (c.y - a.y) - (c.x - a.x) * (b.y - a.y);
 }
+
+bool onSegment(Point a, Point b, Point c)
+{
+    if ((min(a.x, b.x) <= c.x && c.x <= max(a.x, b.x)) && (min(a.y, b.y) <= c.y && c.y <= max(a.y, b.y)))
+        return true;
+    else
+        return false;
+
+}
+bool getIsIntersect(Point a1, Point b1, Point a2, Point b2)
+{
+    double d1 = getDirection(a2, b2, a1);
+    double d2 = getDirection(a2, b2, b1);
+    double d3 = getDirection(a1, b1, a2);
+    double d4 = getDirection(a1, b1, b2);
+
+    if (((d1 > 0 && d2 < 0) || (d1 < 0 && d2 > 0)) &&
+        ((d3 > 0 && d4 < 0) || (d3 < 0 && d3 > 0)))
+        return true;
+    else if (d1 == 0 && onSegment(a2, b2, a1))
+        return true;
+    else if (d2 == 0 && onSegment(a2, b2, b1))
+        return true;
+    else if (d3 == 0 && onSegment(a1, b1, a2))
+        return true;
+    else if (d4 == 0 && onSegment(a1, b1, b2))
+        return true;
+    else
+        return false;
+}
+
 //Задание 10
 int Area(Point a, Point b, Point c, Point d)
 {
@@ -118,9 +150,39 @@ int Area(Point a, Point b, Point c, Point d)
 */
 
 //Задание 11
-/*int Palindrom(){
-    
-}*/
+int Palindrom(string s){
+    int n = s.size(), max = 0;
+    vector<int> d1(n);
+    int l = 0, r = -1;
+    if (n % 2 == 1) {
+        for (int i = 0; i < n; ++i) {
+            int k = i > r ? 1 : min(d1[l + r - i], r - i + 1);
+            while (i + k < n && i - k >= 0 && s[i + k] == s[i - k]) k++;
+            d1[i] = k;
+            if (i + k - 1 > r) {
+                l = i - k + 1; 
+                r = i + k - 1;
+            } 
+            if (r - l > max) 
+                max = r - l;
+        }
+    }
+    else
+    {
+        for (int i = 0; i < n; ++i) {
+            int k = i > r ? 0 : min(d1[l + r - i + 1], r - i + 1);
+            while (i + k < n && i - k - 1 >= 0 && s[i + k] == s[i - k - 1])  k++;
+            d1[i] = k;
+            if (i + k - 1 > r){
+                l = i - k;
+                r = i + k - 1;
+            }  
+            if (r - l > max) 
+                max = r - l;
+        }
+    }
+    return max + 1;
+}
 
 //Задание 12
 int AmountСells() {
@@ -151,7 +213,7 @@ int main()
         << TriangleArea(a, b, c) << endl
         << AmountPoints(a, b) << endl;
 
-    cout << AmountСells();
+    cout << Palindrom("323abccba221");
 }
 
 
