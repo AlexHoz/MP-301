@@ -1,6 +1,7 @@
 ﻿#include <iostream>
 #include <cmath>
 #include <algorithm>
+#include <set>
 using namespace std;
 
 //Задание 1
@@ -98,8 +99,10 @@ string Intersected(Point a, Point b, Point c, Point d)
 //Задание 10
 int Area(Point a, Point b, Point c, Point d)
 {
-    int width = min(b.x, d.x) - max(a.x, c.x);;
-    int height = min(b.y, d.y) - max(a.y, c.y);
+    int xA = max(a.x, c.x), xB = min(b.x, d.x);
+    int yA = max(a.y, c.y), yB = min(b.y, d.y);
+    int width = xB - xA;
+    int height = yB - yA;
 
     return (width < 0 || height < 0) ? 0 : width * height;
 }
@@ -114,6 +117,26 @@ int Area(Point a, Point b, Point c, Point d)
 }
 */
 
+//Задание 11
+/*int Palindrom(){
+    
+}*/
+
+//Задание 12
+int AmountСells() {
+    int n;
+    double x, y, size;
+    set<pair<int,int>> cells;
+    cin >> n >> size;
+    for (int i = 0; i < n; i++) {
+        cin >> x >> y;
+        x /= size;
+        y /= size;
+        if(x - int(x) != 0 && y - int(y) != 0)
+            cells.insert({ int(x), int(y) });
+    }
+    return cells.size();
+}
 
 int main()
 {
@@ -128,7 +151,7 @@ int main()
         << TriangleArea(a, b, c) << endl
         << AmountPoints(a, b) << endl;
 
-    cout << Area({ 0,0 }, { 2,2 }, { 0,0 }, { 3,3 });
+    cout << AmountСells();
 }
 
 
@@ -144,5 +167,6 @@ int main()
 8. Написать функцию, вычисляющую кол-во целых точек на периметре многоугольника
 9. Написать функцию определяющую, пересекаются ли два отрезка
 10. Написать функцию, определяющую площадь пересечения двух прямоугольников
-
+11. Написать функцию, определяющую длину наибольшего палиндрома внутри заданной строки
+12. Написать функцию, вычисляющую кол-во клеток которые проткнули иглой
 */
