@@ -33,6 +33,11 @@ struct Point
         this->x = x;
         this->y = y;
     }
+
+    bool operator<(const Point& p) const
+    {
+        return sqrt(pow(x, 2) + pow(y, 2)) < sqrt(pow(p.x, 2) + pow(p.y, 2));
+    }
 };
 double Length(Point a, Point b) { return sqrt(pow(b.x - a.x, 2) + pow(b.y - a.y, 2)); }
 
@@ -172,19 +177,20 @@ int Palindrom(string s){
 }
 
 //Задание 12
-int AmountСells() {
-    int n;
-    double x, y, size;
-    set<pair<int,int>> cells;
-    cin >> n >> size;
-    for (int i = 0; i < n; i++) {
-        cin >> x >> y;
-        x /= size;
-        y /= size;
-        if(x - int(x) != 0 && y - int(y) != 0)
-            cells.insert({ int(x), int(y) });
+int AmountСells(vector <Point> points, double sizeCell) {
+    int size = points.size();
+    set <Point> cell;
+    for (auto elem : points) {
+        elem.x /= sizeCell;
+        elem.y /= sizeCell;
+        if (elem.x - int(elem.x) != 0 && elem.y - int(elem.y) != 0) {
+            elem.x = int(elem.x);
+            elem.y = int(elem.y);
+            cell.insert({ elem.x , elem.y });
+        }
+            
     }
-    return cells.size();
+    return cell.size();
 }
 
 int main()
@@ -201,7 +207,10 @@ int main()
         << TriangleArea(a, b, c) << endl
         << AmountPoints(a, b) << endl;
 
-    cout << Palindrom("123 abc cba 321");
+    vector<Point> points = { {0,0} , {0.5,0.5} , {0.1,0.5} , {5,0.5} , {2.1,0.1} };
+    cout << AmountСells(points, 1) << endl;
+
+   // cout << Palindrom("123 abc cba 321");
 }
 
 
