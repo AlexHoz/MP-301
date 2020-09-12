@@ -3,6 +3,8 @@
 #include <algorithm>
 #include <set>
 #include <vector>
+#include <string>
+
 
 using namespace std;
 
@@ -35,7 +37,9 @@ struct Point
 double Length(Point a, Point b) { return sqrt(pow(b.x - a.x, 2) + pow(b.y - a.y, 2)); }
 
 //Задание 5
-double TriangleArea(Point a, Point b, Point c) { return ((a.x - c.x) * (b.y - c.y) - (b.x - c.x) * (a.y - c.y)) /2; }
+double TriangleArea(Point a, Point b, Point c) { 
+    return ((a.x - c.x) * (b.y - c.y) - (b.x - c.x) * (a.y - c.y)) /2; 
+}
 
 //Задание 6
 long GCD(long a, long b) 
@@ -59,46 +63,33 @@ double AmountPoints(double xA, double yA, double xB, double yB) {
 }
 
 //Задание 7
-double PoligonPerimeter()
+double PoligonPerimeter(vector <Point> points)
 {
-    int n;
-    long xA, yA, xB, yB, xS, yS;
-    double  p = 0;
-    cin >> n >> xA >> yA;
-    xS = xA; 
-    yS = yA;
-    for (int i = 0; i < n - 1; i++) {
-        cin >> xB >> yB;
-        p += Length(xA, yA, xB, yB);
-        xA = xB; 
-        yA = yB;
+    int size = points.size();
+    double  perimeter = 0;
+    for (int i = 0; i < size - 1; i++) {
+        perimeter += Length(points[i], points[i + 1]);
     }
-    p += Length(xS, yS, xA, yA);
-    return p;
+    perimeter += Length(points[0], points[size - 1]);
+    return perimeter;
 }
 //Задание 8
-int AmountPointsPerimeter() {
-    int n;
-    long xA, yA, xB, yB, xS, yS,  p = 0;
-    cin >> n >> xA >> yA;
-    xS = xA;
-    yS = yA;
-    for (int i = 0; i < n - 1; i++) {
-        cin >> xB >> yB;
-        p += AmountPoints(xA, yA, xB, yB) - 1;
-        xA = xB;
-        yA = yB;
+int AmountPointsPerimeter(vector <Point> points) {
+    int amount = 0;
+    int size = points.size();
+    for (int i = 0; i < size - 1; i++) {
+        amount += AmountPoints(points[i], points[i + 1]) - 1;
     }
-    p += AmountPoints(xS, yS, xA, yA) - 1;
-    return p;
+    amount += AmountPoints(points[0], points[size - 1]) - 1;
+    return amount;
 }
 //Задание 9
-double getDirection(Point a, Point b, Point c)
+double GetDirection(Point a, Point b, Point c)
 {
     return (b.x - a.x) * (c.y - a.y) - (c.x - a.x) * (b.y - a.y);
 }
 
-bool onSegment(Point a, Point b, Point c)
+bool OnSegment(Point a, Point b, Point c)
 {
     if ((min(a.x, b.x) <= c.x && c.x <= max(a.x, b.x)) && (min(a.y, b.y) <= c.y && c.y <= max(a.y, b.y)))
         return true;
@@ -106,23 +97,23 @@ bool onSegment(Point a, Point b, Point c)
         return false;
 
 }
-bool getIsIntersect(Point a1, Point b1, Point a2, Point b2)
+bool getIsIntersect(Point a, Point b, Point c, Point d)
 {
-    double d1 = getDirection(a2, b2, a1);
-    double d2 = getDirection(a2, b2, b1);
-    double d3 = getDirection(a1, b1, a2);
-    double d4 = getDirection(a1, b1, b2);
+    double d1 = GetDirection(c, d, a);
+    double d2 = GetDirection(c, d, b);
+    double d3 = GetDirection(a, b, c);
+    double d4 = GetDirection(a, b, d);
 
     if (((d1 > 0 && d2 < 0) || (d1 < 0 && d2 > 0)) &&
         ((d3 > 0 && d4 < 0) || (d3 < 0 && d3 > 0)))
         return true;
-    else if (d1 == 0 && onSegment(a2, b2, a1))
+    else if (d1 == 0 && OnSegment(c, d, a))
         return true;
-    else if (d2 == 0 && onSegment(a2, b2, b1))
+    else if (d2 == 0 && OnSegment(c, d, b))
         return true;
-    else if (d3 == 0 && onSegment(a1, b1, a2))
+    else if (d3 == 0 && OnSegment(a, b, c))
         return true;
-    else if (d4 == 0 && onSegment(a1, b1, b2))
+    else if (d4 == 0 && OnSegment(a, b, d))
         return true;
     else
         return false;
@@ -138,27 +129,23 @@ int Area(Point a, Point b, Point c, Point d)
 
     return (width < 0 || height < 0) ? 0 : width * height;
 }
-/* ИЛИ ТАК
-int Area(Point a, Point b, Point c, Point d)
-{
-    int width = min(b.x, d.x) - max(a.x, c.x);;
-    int height = min(b.y, d.y) - max(a.y, c.y);
 
-    if (width < 0 || height < 0)  return 0;
-    return width * height;
-}
-*/
-
-//Задание 11
+//Задание 11 (Алгоритм Манакера)
 int Palindrom(string s){
+    for (int i = 0; i < s.size(); i++) {
+        if (s[i] == ' ') {
+            s.erase(i, 1);
+            i--;
+        }
+    }
     int n = s.size(), max = 0;
-    vector<int> d1(n);
+    vector<int> d(n);
     int l = 0, r = -1;
     if (n % 2 == 1) {
         for (int i = 0; i < n; ++i) {
-            int k = i > r ? 1 : min(d1[l + r - i], r - i + 1);
+            int k = i > r ? 1 : min(d[l + r - i], r - i + 1);
             while (i + k < n && i - k >= 0 && s[i + k] == s[i - k]) k++;
-            d1[i] = k;
+            d[i] = k;
             if (i + k - 1 > r) {
                 l = i - k + 1; 
                 r = i + k - 1;
@@ -170,9 +157,9 @@ int Palindrom(string s){
     else
     {
         for (int i = 0; i < n; ++i) {
-            int k = i > r ? 0 : min(d1[l + r - i + 1], r - i + 1);
+            int k = i > r ? 0 : min(d[l + r - i + 1], r - i + 1);
             while (i + k < n && i - k - 1 >= 0 && s[i + k] == s[i - k - 1])  k++;
-            d1[i] = k;
+            d[i] = k;
             if (i + k - 1 > r){
                 l = i - k;
                 r = i + k - 1;
@@ -202,6 +189,7 @@ int AmountСells() {
 
 int main()
 {
+    setlocale(LC_ALL, "Russian");
     //Задание 4
     cout << Length(0, 0, 2, 2) << endl
          << TriangleArea(3, 2, 3) << endl;
@@ -213,7 +201,7 @@ int main()
         << TriangleArea(a, b, c) << endl
         << AmountPoints(a, b) << endl;
 
-    cout << Palindrom("323abccba221");
+    cout << Palindrom("123 abc cba 321");
 }
 
 
