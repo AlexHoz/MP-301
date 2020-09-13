@@ -6,5 +6,5 @@
 1. Переходим на [страницу регистрации](https://identity.cisco.com/ui/tenants/global/v1.0/enrollment-ui) и регистрируемся.
 На сайте нет кнопки "зарегистрироваться" и нужно получать эту ссылку через костыли.
 2. Затем перходим к [странице регистрации на курс](https://www.netacad.com/portal/ru/self-enroll/m/5989) и снова региструемся.
-3. Переходим на страницу [Networking Academy](https://www.netacad.com/ru)
+3. Переходим на страницу [Networking Academy](https://www.netacad.com/ru) и авторизируемся.
 4. Скачиваем [Cisco Packet Tracer](https://www.netacad.com/portal/resources/file/f89cbfc4-878c-40bc-8ba8-f1acc24957ec)
