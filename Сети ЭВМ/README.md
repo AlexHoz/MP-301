@@ -8,3 +8,15 @@
 2. Затем перходим к [странице регистрации на курс](https://www.netacad.com/portal/ru/self-enroll/m/5989) и снова региструемся.
 3. Переходим на страницу [Networking Academy](https://www.netacad.com/ru) и авторизируемся.
 4. Скачиваем [Cisco Packet Tracer](https://www.netacad.com/portal/resources/file/f89cbfc4-878c-40bc-8ba8-f1acc24957ec)
+
+# Инструкция по использованию Cisco Packet Tracer
+Будет дополняться...
+
+1. Чтобы добавить какое-то устройство/подключение:
+    1. В левом нижнем углу выбрать какую либо вкладку и тип устройства/подключение.
+    2. Справа выбрать нужно устройство и перенести его в рабочую область
+    
+    Пример:
+    Нужно добавить Switсh, перходим в Network Divices->Switches иперетаскиваем PT-Switch в рабочую область.
+
+    ![Divices](https://github.com/AlexHoz/MP-301/blob/master/Сети%20ЭВМ/Скриншоты/device.png)
