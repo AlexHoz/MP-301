@@ -30,7 +30,7 @@
 
     ![ping](https://github.com/AlexHoz/MP-301/blob/master/Сети%20ЭВМ/Скриншоты/Lab_1/4.png)
 
-4. Создаём ARP-таблицу(Вообще в лабе это 5й пункт, но пока мы тут сожно сразу сделать.)
+4. Создаём ARP-таблицу(Вообще в лабе это 5й пункт, но пока мы тут можно сразу сделать.)
     1. В этой же консоли пишем arm -a
 
     ![arm](https://github.com/AlexHoz/MP-301/blob/master/Сети%20ЭВМ/Скриншоты/Lab_1/5.png)
@@ -42,6 +42,7 @@
     4. То же делаем для второго PT-Switch.
 
     ![Switch](https://github.com/AlexHoz/MP-301/blob/master/Сети%20ЭВМ/Скриншоты/Lab_1/6.png)
+    
     ![Switch](https://github.com/AlexHoz/MP-301/blob/master/Сети%20ЭВМ/Скриншоты/Lab_1/7.png)
 
 6. Пишем отчёт по моему примеру.
