@@ -31,5 +31,7 @@
     Пример: Добавим в Switсh порт Fast-Ethernet, выключаем устройство, выбираем нужный порт, перетаскиваем и включаем.
 
     ![Port_1](https://github.com/AlexHoz/MP-301/blob/master/Сети%20ЭВМ/Скриншоты/port_1.png)
+
     ![Port_2](https://github.com/AlexHoz/MP-301/blob/master/Сети%20ЭВМ/Скриншоты/port_2.png)
+    
     ![Switch](https://github.com/AlexHoz/MP-301/blob/master/Сети%20ЭВМ/Скриншоты/switch.png)
