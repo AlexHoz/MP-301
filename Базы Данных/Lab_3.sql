@@ -62,7 +62,34 @@ WHERE model IN
     )
     AND maker IN (SELECT maker FROM product WHERE type='Printer')
 
---Задание 26
+--Задание 26 (Вариант 1)
+SELECT AVG(price) AS AVG_PRICE
+FROM 
+	(
+	SELECT price, model, code
+	FROM PC
+	WHERE model
+	IN
+		(
+		SELECT model
+		FROM Product
+		WHERE maker = 'A'
+		AND type = 'PC'
+		)
+	UNION
+	SELECT price, model, code
+	FROM Laptop
+	WHERE model
+	IN
+		(
+		SELECT model
+		FROM Product
+		WHERE maker = 'A'
+		AND type = 'Laptop'
+		)
+	) AS NEW_TABLE
+
+--Задание 26 (Вариант 2)
 SELECT AVG(price)
 FROM
 (
