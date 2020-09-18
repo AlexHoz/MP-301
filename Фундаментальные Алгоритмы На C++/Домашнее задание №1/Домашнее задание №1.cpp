@@ -178,7 +178,6 @@ int Palindrom(string s) {
 
 //Задание 12
 int AmountСells(const vector <Point>& points, double sizeCell) {
-    int size = points.size();
     set <Point> cell;
     for (auto elem : points) {
         elem.x /= sizeCell;
