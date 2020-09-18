@@ -70,8 +70,8 @@ struct Point
 	}
 };
 
-int AmountСells(const vector<Point>& points, double sizeCell) {
-	int size = points.size();
+int AmountСells(const vector<Point>& points, double sizeCell)
+{
 	set <Point> cell;
 	for (auto elem : points) {
 		elem.x /= sizeCell;
@@ -94,10 +94,8 @@ vector<type> AdjacentFind(const vector<type>& vec)
 	if (vec.size() < 2)
 		return vector<type>(0);
 
-	typename vector<type>::const_iterator it;
-	for (it = vec.begin(); it != vec.end() - 1; it++)
-		if (*it == *(it + 1)) return vector<type>(2) = { *it, *(it + 1) };
-
+	for (int i = 0; i < vec.size() - 1; i++)
+		if (vec[i] == vec[i + 1]) return vector<type>(2) = { vec[i], vec[i + 1] };
 	return vector<type>(0);
 }
 
@@ -109,10 +107,9 @@ bool Sorted(const vector<type>& vec)
 	if (vec.size() < 2)
 		return true;
 
-	typename vector<type>::const_iterator it;
-	for (it = vec.begin(); it != vec.end() - 1; it++)
+	for (int i = 0; i < vec.size() - 1; i++)
 	{
-		if (*it > *(it + 1)) return false;
+		if (vec[i] > vec[i + 1]) return false;
 	}
 	return true;
 }
@@ -144,16 +141,16 @@ bool PermutatedArrays(const vector<type>& vecFirst, const vector<type>& vecSecon
 
 int main()
 {
-	vector<int> vec { 3, 1, 1, 2, 3, 3, 1 };
+	vector<int> vec{ 3, 1 };
 	vector<int> vecPermutated{ 3, 3, 3, 1, 1, 1, 2 };
 	//Задание 3
 	//AdjacentFind(vector<int>(0) = { });
 	//Задание 4
-	cout << Sorted(vec)<< endl;
+	cout << Sorted(vec) << endl;
 	//Задание 5
 	cout << ValueCount(vec, 1) << endl;
 	//Задание 6
-	cout << PermutatedArrays(vec, vecPermutated)<< endl;
+	cout << PermutatedArrays(vec, vecPermutated) << endl;
 	system("pause");
 	return 0;
 }
