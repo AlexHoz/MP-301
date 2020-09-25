@@ -4,8 +4,8 @@
 #include <algorithm>
 using namespace std;
 
-//Задание 1
-//Не рекомендую брать этот способ(Лепчинский на него выеживается), но лучше я не придумал
+// Задание 1
+// Не рекомендую брать этот способ (Лепчинский на него выеживается), но лучше я не придумал
 int Palindrom(string s) {
 	for (int i = 0; i < s.size(); i++) {
 		if (s[i] == ' ') {
@@ -46,7 +46,8 @@ int Palindrom(string s) {
 	return max + 1;
 }
 
-//Задание 2
+// Задание 2
+// Этот способ лучше тоже не трогать, Лепчинский думает, что уже где-то видел этот код
 struct Point
 {
 	double x;
@@ -86,7 +87,7 @@ int AmountСells(const vector<Point>& points, double sizeCell)
 	return cell.size();
 }
 
-//Задание 3
+// Задание 3
 template <typename type>
 
 vector<type> AdjacentFind(const vector<type>& vec)
@@ -99,7 +100,7 @@ vector<type> AdjacentFind(const vector<type>& vec)
 	return vector<type>(0);
 }
 
-//Задание 4
+// Задание 4
 template <typename type>
 
 bool Sorted(const vector<type>& vec)
@@ -114,7 +115,7 @@ bool Sorted(const vector<type>& vec)
 	return true;
 }
 
-//Задание 5
+// Задание 5
 template <typename type>
 
 int ValueCount(const vector<type>& vec, type value)
@@ -126,7 +127,7 @@ int ValueCount(const vector<type>& vec, type value)
 	return count;
 }
 
-//Задание 6
+// Задание 6
 template <typename type>
 
 bool PermutatedArrays(const vector<type>& vecFirst, const vector<type>& vecSecond)
