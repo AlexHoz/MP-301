@@ -3,7 +3,7 @@
 
 1. Создаём сеть как на картинке(расположение может быть разное, главное подключите также). Для этого нам нужны:
     1. 2 PC (End Devices->End Devices)
-    2. 2 PT-Switch (Network Divices->Switches)
+    2. 1 PT-Switch (Network Divices->Switches)
     3. 100 метров витой пары
     
     ![Сеть](https://github.com/AlexHoz/MP-301/blob/master/Сети%20ЭВМ/Скриншоты/Lab_2/1.png)
