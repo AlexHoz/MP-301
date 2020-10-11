@@ -45,12 +45,15 @@ WHERE type = 'Laptop' AND Laptop.speed < ALL (SELECT speed
  )
 
 --Задание 23
-SELECT DISTINCT maker
-FROM Product JOIN PC ON Product.model = PC.model
-WHERE speed >= 750 AND maker IN
-    (SELECT maker
-    FROM Product JOIN Laptop ON Product.model = Laptop.model
-    WHERE speed >= 750 )
+SELECT maker 
+  FROM Product JOIN PC
+    ON Product.model = PC.model
+ WHERE (PC.speed >= 750)
+INTERSECT
+SELECT maker 
+  FROM Product JOIN Laptop 
+    ON Product.model = Laptop.model
+ WHERE (Laptop.speed >= 750)
 
 --Задание 25
 SELECT DISTINCT Maker
@@ -92,21 +95,31 @@ FROM
 --Задание 26 (Вариант 2)
 SELECT AVG(price)
 FROM
-(
-SELECT PC.price, PC.code, Product.type, Product.model
-FROM PC JOIN Product ON (Product.model = PC.model 
-			AND Product.type = 'PC' AND Product.maker = 'A')
-UNION
-SELECT Laptop.price,Laptop.code, Product.type, Product.model
-FROM Laptop JOIN Product ON (Product.model = Laptop.model 
-			AND Product.type = 'Laptop' AND Product.maker = 'A')
-) AS NewTable
+	(
+	SELECT PC.price, PC.code, Product.type, Product.model
+	FROM PC
+	JOIN Product
+	ON (Product.model = PC.model 
+		AND Product.type = 'PC'
+		AND Product.maker = 'A'
+		)
+	UNION
+	SELECT Laptop.price,Laptop.code, Product.type, Product.model
+	FROM Laptop
+	JOIN Product
+	ON (Product.model = Laptop.model 
+		AND Product.type = 'Laptop'
+		AND Product.maker = 'A'
+		)
+	) AS NewTable
 
 --Задание 34
 SELECT DISTINCT name
 FROM Ships, Classes 
-WHERE Ships.launched >= 1922 AND Classes.type = 'bb' 
-      AND Classes.displacement > 35000 AND Ships.class = Classes.class
+WHERE Ships.launched >= 1922
+	AND Classes.type = 'bb' 
+    AND Classes.displacement > 35000
+	AND Ships.class = Classes.class
 
 --Задание 36
 SELECT name
@@ -132,3 +145,24 @@ WHERE maker NOT IN (
 		FROM pc 
 	) 
 ) 
+
+--Дополнительные задания из лабораторной
+-- 1.3
+SELECT model, price
+FROM Printer
+WHERE color = 'y'
+	AND price = (
+				SELECT MIN(price)
+                FROM Printer
+                WHERE color = 'y'
+				)
+								 
+-- 2.9.1
+SELECT model
+  FROM PC
+  
+-- 2.9.2
+SELECT model
+FROM Product
+WHERE type = 'pc'
+	AND model NOT IN (SELECT model FROM PC)
