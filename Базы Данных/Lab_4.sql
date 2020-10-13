@@ -34,16 +34,24 @@ HAVING COUNT(DISTINCT type) = 1 AND COUNT(model) > 1
 
 --Задание 144
 SELECT maker
-FROM Product, PC
-WHERE Product.model = PC.model 
-	AND PC.price
-	IN (SELECT MIN(price) FROM PC)
+FROM product
+WHERE model
+IN (
+	SELECT model FROM pc WHERE price
+	IN (
+		SELECT MAX(price) FROM pc
+	)
+   )
 INTERSECT
 SELECT maker
-FROM Product, PC
-WHERE Product.model = PC.model 
-	AND PC.price
-	IN (SELECT MAX(price) FROM PC)
+FROM product
+WHERE model
+IN (
+	SELECT model FROM pc WHERE price 
+	IN (
+		SELECT MIN(price) FROM pc
+	)
+)
 
 --Дополнительные задания из лабораторной
 -- 1.2
