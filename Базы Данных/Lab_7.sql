@@ -1,3 +1,9 @@
+--Задание 6
+SELECT DISTINCT maker, speed
+FROM product JOIN laptop
+ON product.model = laptop.model
+WHERE hd >= 10
+
 --Задание 16
 SELECT DISTINCT A.model AS model_1, B.model AS model_2, A.speed, A.ram 
 FROM pc AS A, pc B
