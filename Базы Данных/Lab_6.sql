@@ -60,12 +60,12 @@ IN
   IN
   (
     SELECT *
-    FROM R
+    FROM r_v
   )
   AND  b_q_id
   IN
   (
     SELECT *
-    FROM B
+    FROM b_q
   )
 )
