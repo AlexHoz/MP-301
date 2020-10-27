@@ -21,3 +21,51 @@ FROM
   FROM Outcome
 ) AS Incomes
 GROUP BY point, date
+
+--Задание 96
+WITH r_v AS (
+  SELECT b_v_id
+  FROM utb
+  GROUP BY b_v_id
+  HAVING count(b_v_id) > 1
+  AND b_v_id
+  IN
+  (
+    SELECT v_id
+    FROM utv
+    WHERE v_color = 'R'
+  )
+),
+b_q AS (
+  SELECT b_q_id
+  FROM utb
+  GROUP BY b_q_id, b_v_id 
+  HAVING b_v_id
+  IN
+  (
+    SELECT v_id
+    FROM utv
+    WHERE v_color = 'B'
+  )
+)
+
+SELECT v_name
+FROM utv
+WHERE v_id
+IN
+(
+  SELECT DISTINCT b_v_id
+  FROM utb
+  WHERE b_v_id
+  IN
+  (
+    SELECT *
+    FROM R
+  )
+  AND  b_q_id
+  IN
+  (
+    SELECT *
+    FROM B
+  )
+)
