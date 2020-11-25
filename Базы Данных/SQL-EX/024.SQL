@@ -1,20 +1,23 @@
-WITH UNITED AS
+WITH prices AS
 (
-SELECT model, price
-FROM PC
-
-UNION
-
-SELECT model, price
-FROM Laptop
-
-UNION
-
-SELECT model, price
-FROM Printer
+  SELECT model, price
+  FROM pc
+  UNION
+  SELECT model, price
+  FROM laptop
+  UNION
+  SELECT model, price
+  FROM printer
+),
+max_price AS
+(
+  SELECT MAX(price) AS max_price
+  FROM prices
 )
+
 SELECT model
-FROM UNITED
-WHERE price = (
-SELECT MAX (price) AS max_price
-FROM UNITED )
+FROM prices
+WHERE price IN
+(
+  SELECT * FROM max_price
+)
